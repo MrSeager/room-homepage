@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
+import { motion } from 'framer-motion';
+
 import LogoImg from './images/logo.svg';
 import DeskImg1 from './images/desktop-image-hero-1.jpg';
 import DeskImg2 from './images/desktop-image-hero-2.jpg';
@@ -37,7 +39,7 @@ const MainPage = () => {
     {
       imgSrc: DeskImg2,
       heading: "We are available all across the globe",
-      paragraph: "Our modern furniture store provide a high level of quality. Our company has invested in advanced technology to ensure that every product is made as perfect and as consistent as possible. With three decades of experience in this industry, we understand what customers want for their home and office.",
+      paragraph: "With stores all over the world, it's easy for you to find furniture for your home or place of business. Locally, we’re in most major cities throughout the country. Find the branch nearest you using our store locator. Any questions? Don't hesitate to contact us today.",
     },
     {
       imgSrc: DeskImg3,
@@ -57,19 +59,30 @@ const MainPage = () => {
     setCurrentIndex((prevIndex) => (prevIndex === contentData.length - 1 ? 0 : prevIndex + 1));
   };
 
+  const fadeIn = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 0.5 }, // Adjust duration as needed
+  };
+
   return (
     <section>
-      <img src={currentContent.imgSrc} alt="img" className='img1' />
+      <motion.img 
+        src={currentContent.imgSrc} 
+        alt="img" 
+        className='img1'
+        key={currentContent.imgSrc}
+        {...fadeIn} />
       <div id="disc">
-        <h1>{currentContent.heading}</h1>
-        <p>{currentContent.paragraph}</p>
+        <h1 {...fadeIn}>{currentContent.heading}</h1>
+        <p {...fadeIn}>{currentContent.paragraph}</p>
         <a>Shop now &#8594;</a>
         <div id="arrows">
           <button onClick={handleLeftArrowClick}>&lt;</button>
           <button onClick={handleRightArrowClick}>&gt;</button>
         </div>
       </div>
-      <img src={AboutImg1} alt="aboutImg" className='img2' />
+      <motion.img src={AboutImg1} alt="aboutImg" className='img2' {...fadeIn} />
       <div id="about">
         <h2>About our furniture</h2>
         <p>Our multifunctional collection blends design and function to suit your individual taste.
@@ -77,7 +90,7 @@ const MainPage = () => {
         inspires you. Find the furniture pieces you need, from traditional to contemporary styles
         or anything in between. Product specialists are available to help you create your dream space.</p>
       </div>
-      <img src={AboutImg2} alt="aboutImg" className='img2' />
+      <motion.img src={AboutImg2} alt="aboutImg" className='img2' {...fadeIn} />
     </section>
   );
 };
